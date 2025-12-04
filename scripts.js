@@ -1,22 +1,21 @@
-// Toggle for Dark/Light Mode
-function toggleMode() {
-  const body = document.body;
-  const currentMode = body.classList.contains('dark-mode');
+function openApp(app) {
+  document.getElementById("app-window").classList.remove("hidden");
 
-  // Toggle the dark-mode class on the body tag
-  if (currentMode) {
-    body.classList.remove('dark-mode');
-    localStorage.setItem('mode', 'light'); // Save the preference in localStorage
-  } else {
-    body.classList.add('dark-mode');
-    localStorage.setItem('mode', 'dark'); // Save the preference in localStorage
+  let content = document.getElementById("app-content");
+
+  if (app === "settings") {
+    content.innerHTML = "<h2>Settings</h2><p>Wi-Fi, Bluetooth, Display</p>";
+  }
+
+  if (app === "notes") {
+    content.innerHTML = "<h2>Notes</h2><textarea style='width:100%; height:300px;'></textarea>";
+  }
+
+  if (app === "camera") {
+    content.innerHTML = "<h2>Camera</h2><p>Camera simulator loading...</p>";
   }
 }
 
-// Check for saved mode preference in localStorage and apply it on page load
-window.onload = () => {
-  const savedMode = localStorage.getItem('mode');
-  if (savedMode === 'dark') {
-    document.body.classList.add('dark-mode');
-  }
-};
+function closeApp() {
+  document.getElementById("app-window").classList.add("hidden");
+}
