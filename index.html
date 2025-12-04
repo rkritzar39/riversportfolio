@@ -2,192 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Your Professional Portfolio">
-  <title>Your Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>iOS Emulator</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Navigation Bar -->
-  <header>
-    <nav class="navbar">
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#resume">Resume</a></li>
-        <li><button class="mode-toggle" onclick="toggleMode()">🌙</button></li>
-      </ul>
-    </nav>
-  </header>
+<div class="iphone">
+  <div class="status-bar">12:00</div>
 
-  <!-- Sections -->
-  <section id="home" class="section home">
-    <h1>Welcome to My Portfolio</h1>
-    <p>Intro text here</p>
-  </section>
+  <div class="screen">
+    <div class="app" onclick="openApp('settings')">⚙️<span>Settings</span></div>
+    <div class="app" onclick="openApp('notes')">📝<span>Notes</span></div>
+    <div class="app" onclick="openApp('camera')">📷<span>Camera</span></div>
+  </div>
 
-  <section id="projects" class="section">
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>Project 1</h3>
-      <p>Description of project 1</p>
-    </div>
-    <!-- Add more projects here -->
-  </section>
+  <div class="dock">Home Bar</div>
+</div>
 
-  <section id="skills" class="section">
-    <h2>Skills</h2>
-    <div class="skills">
-      <div class="skill">
-        <i class="fab fa-html5"></i>
-        <p>HTML</p>
-      </div>
-      <!-- Add more skills here -->
-    </div>
-  </section>
+<div id="app-window" class="hidden">
+  <button onclick="closeApp()">⬅ Back</button>
+  <div id="app-content"></div>
+</div>
 
-  <section id="contact" class="section">
-    <h2>Contact</h2>
-    <p>Email: example@example.com</p>
-    <!-- Add more contact methods -->
-  </section>
-
-  <section id="resume" class="section">
-    <h2>Resume</h2>
-    <p>Below is my full resume, showcasing my experience and qualifications:</p>
-
-    <!-- Contact Information -->
-    <div class="resume-section">
-      <h3>Contact Information</h3>
-      <p>RIVER KRITZAR</p>
-      <p>402 N Main St Bowling Green OH 43402</p>
-      <p>567.436.8082</p>
-      <p><a href="mailto:rkritzar53@gmail.com">rkritzar53@gmail.com</a></p>
-    </div>
-
-    <!-- Professional Summary -->
-    <div class="resume-section">
-      <h3>Professional Summary</h3>
-      <p>Certified computer technician with a passion for repair, including both software and hardware troubleshooting. Interest in Apple products, Windows, and Mac operating systems. Proven excellence in customer service. Establishes strong working relationships with co-workers to achieve ultimate productivity.</p>
-    </div>
-
-    <!-- Work Experience -->
-    <div class="resume-section">
-      <h3>Experience</h3>
-      <ul>
-        <li>
-          <h4>WHISTLE STOP CAFÉ | Kitchen Crew | North Baltimore OH</h4>
-          <p>Jan - Apr 2024</p>
-          <ul>
-            <li>Prepared pizzas, modifying standard recipes to account for customer requests and substitutions.</li>
-          </ul>
-        </li>
-        <li>
-          <h4>CULVER’S | Crew Member | Bowling Green OH</h4>
-          <p>Mar – Jul 2023</p>
-          <ul>
-            <li>Excellent customer service and POS cash register.</li>
-            <li>Prepared sandwiches to customer specifications using proper food safety measures.</li>
-          </ul>
-        </li>
-        <li>
-          <h4>TACO BELL | Crew Member | Bowling Green OH</h4>
-          <p>Jun 2022 – Apr 2023</p>
-          <ul>
-            <li>Excellent customer service and POS cash register.</li>
-            <li>Received orders through the drive through and accurately relayed orders.</li>
-            <li>Carefully reviewed orders and delivered customer food at the drive through.</li>
-          </ul>
-        </li>
-        <li>
-          <h4>PAGLIAI’S | Kitchen Team Member | Bowling Green OH</h4>
-          <p>Apr 2022 – Jun 2022</p>
-          <ul>
-            <li>Prepared pizzas, modifying standard recipes to account for customer requests and substitutions.</li>
-            <li>Performed proper washing and sanitizing of dishes, maintaining a clean and orderly kitchen.</li>
-          </ul>
-        </li>
-        <li>
-          <h4>MCDONALD’S | Crew Member | Bowling Green OH</h4>
-          <p>July 2021 – Dec 2021</p>
-          <ul>
-            <li>Received orders through the drive through and accurately relayed orders.</li>
-            <li>Pleasantly greeted and welcomed customers prior to taking orders.</li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Education -->
-    <div class="resume-section">
-      <h3>Education</h3>
-      <ul>
-        <li>
-          <h4>Elmwood High School</h4>
-          <p>Bloomdale OH | Graduated May 2024</p>
-        </li>
-        <li>
-          <h4>Penta Career Center</h4>
-          <p>Information Technology Academy | Perrysburg OH | Graduated May 2024</p>
-        </li>
-        <li>
-          <h4>Honors & Achievements</h4>
-          <p>Honor Roll Fall 2022 - Spring 2023</p>
-          <p>Earned 6 college credits in computer hardware and programming</p>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Certifications -->
-    <div class="resume-section">
-      <h3>Certifications</h3>
-      <ul>
-        <li>Test Out Certified PC Pro</li>
-        <li>Alison Computer Maintenance and PC Building</li>
-        <li>Cybrary CompTIA IT Fundamentals and Cyber Security</li>
-        <li>Web Xam N4 Cybersecurity (85 MD)</li>
-      </ul>
-    </div>
-
-    <!-- Optional Sections -->
-    <div class="resume-section optional">
-      <h3>Awards & Achievements</h3>
-      <ul>
-        <li>Example Award 1</li>
-        <li>Example Award 2</li>
-      </ul>
-    </div>
-
-    <div class="resume-section optional">
-      <h3>Projects</h3>
-      <ul>
-        <li>Project 1: Description of the project</li>
-        <li>Project 2: Description of the project</li>
-      </ul>
-    </div>
-
-    <div class="resume-section optional">
-      <h3>Languages</h3>
-      <ul>
-        <li>English</li>
-        <li>Spanish</li>
-      </ul>
-    </div>
-
-    <div class="resume-section optional">
-      <h3>Volunteer Experience</h3>
-      <ul>
-        <li>Example Volunteer Work 1</li>
-        <li>Example Volunteer Work 2</li>
-      </ul>
-    </div>
-  </section>
-
-    <script src="scripts.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
