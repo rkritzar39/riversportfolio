@@ -1,29 +1,112 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>iOS Emulator</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>iOS 26 — Web Replica</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-<div class="iphone">
-  <div class="status-bar">12:00</div>
-
-  <div class="screen">
-    <div class="app" onclick="openApp('settings')">⚙️<span>Settings</span></div>
-    <div class="app" onclick="openApp('notes')">📝<span>Notes</span></div>
-    <div class="app" onclick="openApp('camera')">📷<span>Camera</span></div>
+  <!-- Lock screen -->
+  <div id="lock-screen" class="screen-layer visible">
+    <div class="lock-wallpaper"></div>
+    <div class="lock-top">
+      <div class="status-left">🔆</div>
+      <div class="time" id="lock-time">12:00</div>
+      <div class="status-right">100%</div>
+    </div>
+    <div class="lock-center">
+      <div class="date" id="lock-date">Wednesday, Jan 1</div>
+      <div class="big-time" id="lock-big-time">12:00</div>
+      <div class="widgets-row">
+        <div class="widget small">Weather: 72°F</div>
+        <div class="widget small">Next: Meeting 2pm</div>
+      </div>
+    </div>
+    <div class="lock-bottom">
+      <div class="swipe-tip">Swipe up to unlock</div>
+    </div>
   </div>
 
-  <div class="dock">Home Bar</div>
-</div>
+  <!-- Home (main) -->
+  <div id="home-screen" class="screen-layer hidden" data-page="1" aria-hidden="true">
+    <div class="home-wallpaper"></div>
 
-<div id="app-window" class="hidden">
-  <button onclick="closeApp()">⬅ Back</button>
-  <div id="app-content"></div>
-</div>
+    <!-- Dynamic Island -->
+    <div id="dynamic-island" class="dynamic-island">
+      <div class="pill">
+        <div class="pill-left"> Music — Playing</div>
+        <div class="pill-right">⏺</div>
+      </div>
+    </div>
 
-<script src="script.js"></script>
+    <!-- Status Bar -->
+    <div id="status" class="status-bar">
+      <div class="left">Carrier</div>
+      <div class="center" id="home-time">12:00</div>
+      <div class="right">🔋100%</div>
+    </div>
+
+    <!-- Home grid -->
+    <div id="home-grid" class="home-grid"></div>
+
+    <!-- Dock -->
+    <div id="dock" class="dock"></div>
+
+    <!-- Control center overlay -->
+    <div id="control-center" class="overlay hidden">
+      <div class="cc-panel">
+        <div class="cc-row">
+          <div class="cc-tile big">Wi-Fi<br><small>On</small></div>
+          <div class="cc-tile big">Bluetooth<br><small>On</small></div>
+          <div class="cc-stack">
+            <div class="cc-tile">Music</div>
+            <div class="cc-tile">Focus</div>
+          </div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-tile medium">Brightness</div>
+          <div class="cc-tile medium">Volume</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification center overlay -->
+    <div id="notif-center" class="overlay hidden">
+      <div class="notif-panel">
+        <div class="notif">Messages — "You around?"</div>
+        <div class="notif">Calendar — Team Standup 2pm</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- App window -->
+  <div id="app-window" class="screen-layer hidden">
+    <div class="app-top">
+      <button id="app-back" class="btn">◀ Home</button>
+      <div id="app-title">App</div>
+      <div class="app-actions">•••</div>
+    </div>
+    <div id="app-body" class="app-body"></div>
+  </div>
+
+  <!-- App Library modal -->
+  <div id="app-library" class="screen-layer hidden">
+    <div class="lib-top">
+      <h3>App Library</h3>
+      <button id="lib-close" class="btn">Close</button>
+    </div>
+    <div class="lib-grid" id="lib-grid"></div>
+  </div>
+
+  <template id="app-tpl">
+    <div class="app-tile" tabindex="0">
+      <div class="app-icon">📱</div>
+      <div class="app-label">App</div>
+    </div>
+  </template>
+
+  <script src="script.js"></script>
 </body>
 </html>
