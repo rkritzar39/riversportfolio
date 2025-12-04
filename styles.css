@@ -1,73 +1,85 @@
-body {
-  background: #0f0f14;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont;
+/* iOS 26 web replica styles — frosty, rounded, modern */
+/* → tweak variables for exact look */
+:root{
+  --viewport-w:360px;
+  --viewport-h:780px;
+  --corner:36px;
+  --bg:#020617;
+  --glass: rgba(255,255,255,0.06);
+  --glass-2: rgba(255,255,255,0.04);
+  --accent: linear-gradient(135deg,#6fe2ff,#8b7bff);
+  --icon-size:60px;
+  --tile-radius:18px;
+  --dock-height:84px;
+  --font: -apple-system, "SF Pro Text", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-.iphone {
-  width: 360px;
-  height: 780px;
-  background: black;
-  border-radius: 40px;
-  padding-top: 10px;
-  box-shadow: 0 0 40px rgba(0,0,0,0.9);
-}
+*{box-sizing:border-box}
+html,body{height:100%; margin:0; background:var(--bg); font-family:var(--font); color:#fff; -webkit-font-smoothing:antialiased;}
+.screen-layer{ width:var(--viewport-w); height:var(--viewport-h); border-radius:var(--corner); margin:30px auto; position:relative; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,0.7); transform-origin:center;}
 
-.status-bar {
-  color: white;
-  text-align: center;
-  font-size: 14px;
-}
+/* Visible / hidden helpers */
+.visible{ display:block; }
+.hidden{ display:none; }
 
-.screen {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 30px;
-}
+/* wallpapers */
+.lock-wallpaper, .home-wallpaper{ position:absolute; inset:0; background-image: radial-gradient(ellipse at top left, rgba(99,123,255,0.18), transparent 20%), linear-gradient(180deg,#020617,#001025); background-size:cover; filter: contrast(1.05) saturate(1.05); z-index:0;}
+.lock-wallpaper::after{ content:""; position:absolute; inset:0; backdrop-filter: blur(6px) saturate(1.1); }
 
-.app {
-  background: #1c1c1e;
-  color: white;
-  border-radius: 18px;
-  text-align: center;
-  padding: 20px;
-  cursor: pointer;
-  transition: 0.2s;
-}
+/* status bars */
+.lock-top, .status-bar{ position:relative; z-index:3; display:flex; justify-content:space-between; padding:12px 16px; font-size:13px; color:#e6eefc; }
 
-.app:hover {
-  transform: scale(1.05);
-}
+/* lock screen center */
+.lock-center{ position:relative; z-index:3; text-align:center; padding-top:60px;}
+.lock-center .date{ opacity:0.85; font-size:14px; margin-bottom:6px;}
+.lock-center .big-time{ font-size:64px; font-weight:600; letter-spacing:1px; margin-bottom:10px;}
+.widgets-row{ display:flex; gap:12px; justify-content:center; margin-top:8px;}
+.widget.small{ background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.15)); padding:8px 12px; border-radius:12px; font-size:13px; box-shadow: 0 6px 18px rgba(0,0,0,0.5);}
 
-.app span {
-  display: block;
-  font-size: 12px;
-  margin-top: 6px;
-}
+/* swipe tip */
+.lock-bottom{ position:absolute; bottom:26px; width:100%; text-align:center; z-index:3;}
+.swipe-tip{ font-size:13px; opacity:0.8; padding:8px 12px; border-radius:999px; background:rgba(255,255,255,0.03); display:inline-block; }
 
-.dock {
-  background: #1c1c1e;
-  color: white;
-  text-align: center;
-  margin: 12px;
-  padding: 10px;
-  border-radius: 20px;
-}
+/* Dynamic Island */
+.dynamic-island{ position:absolute; top:8px; left:50%; transform:translateX(-50%); z-index:4; pointer-events:none;}
+.dynamic-island .pill{ display:flex; align-items:center; gap:12px; padding:10px 14px; background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.2)); border-radius:999px; backdrop-filter: blur(8px); box-shadow: 0 6px 18px rgba(0,0,0,0.6); pointer-events:auto; }
 
-#app-window {
-  position: fixed;
-  background: black;
-  color: white;
-  width: 360px;
-  height: 780px;
-  border-radius: 40px;
-  padding: 20px;
-}
+/* Home grid */
+.home-grid{ position:relative; z-index:3; padding:84px 18px 120px 18px; display:grid; grid-template-columns: repeat(4,1fr); gap:16px; align-content:start; }
+.app-tile{ display:flex; gap:8px; flex-direction:column; align-items:center; justify-content:center; text-align:center; cursor:pointer; user-select:none; transition: transform .12s ease; }
+.app-tile:active{ transform: scale(.98); }
+.app-icon{ width:var(--icon-size); height:var(--icon-size); border-radius:20px; display:flex; align-items:center; justify-content:center; font-size:28px; background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.12)); box-shadow: 0 10px 30px rgba(0,0,0,0.6) inset; }
+.app-label{ font-size:11px; margin-top:6px; color: #e9eefc; }
 
-.hidden {
-  display: none;
+/* Dock */
+.dock{ position:absolute; bottom:14px; left:14px; right:14px; height:var(--dock-height); z-index:5; display:flex; align-items:center; justify-content:center; padding:12px; border-radius:22px; background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.08)); backdrop-filter: blur(12px); box-shadow:0 20px 40px rgba(0,0,0,0.6);}
+.dock .dock-icon{ margin:0 10px; display:flex; flex-direction:column; align-items:center; width:64px; }
+
+/* overlays (control center / notif center) */
+.overlay{ position:absolute; inset:0; z-index:20; display:flex; align-items:flex-end; justify-content:center; padding:18px; pointer-events:auto; }
+.overlay .cc-panel, .overlay .notif-panel{ width:100%; max-width:640px; background: linear-gradient(180deg, rgba(10,10,12,0.75), rgba(0,0,0,0.6)); border-radius:16px; padding:12px; backdrop-filter: blur(12px); box-shadow:0 30px 80px rgba(0,0,0,0.7); }
+.cc-row{ display:flex; gap:12px; margin-bottom:12px; }
+.cc-tile{ flex:1; border-radius:12px; padding:12px; background: rgba(255,255,255,0.02); text-align:center; }
+.cc-tile.big{ flex:2; font-weight:600; }
+
+/* Notification center */
+.notif{ background: rgba(255,255,255,0.02); padding:12px; border-radius:12px; margin-bottom:10px; font-size:14px; }
+
+/* App window */
+#app-window{ z-index:30; background:linear-gradient(180deg,#06111a,#021017); border-radius:20px; position:absolute; inset:14px; display:flex; flex-direction:column; overflow:hidden; }
+.app-top{ display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-bottom:1px solid rgba(255,255,255,0.02); }
+.app-body{ padding:12px; overflow:auto; }
+
+/* App Library */
+#app-library{ z-index:35; background:linear-gradient(180deg,#071026,#041021); position:absolute; inset:10px; border-radius:18px; padding:12px; overflow:auto; }
+.lib-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px; }
+.lib-grid .app-tile{ background: rgba(255,255,255,0.02); padding:8px; border-radius:12px; align-items:center; }
+
+/* small buttons */
+.btn{ background:transparent; border:1px solid rgba(255,255,255,0.06); padding:8px 12px; border-radius:10px; color:#fff; cursor:pointer; }
+
+/* responsive-ish */
+@media (max-width:420px){
+  :root{ --viewport-w:320px; --viewport-h:720px; --corner:28px; --icon-size:54px; }
+  .home-grid{ grid-template-columns: repeat(4,1fr); gap:12px; padding-bottom:110px; }
 }
